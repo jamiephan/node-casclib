@@ -13,7 +13,7 @@ using namespace std;
 
 Napi::Object Init(Napi::Env env, Napi::Object exports) {
     locales::Init(env, exports);
-    storageinfo::Init(env, exports);
+    // storageinfo::Init(env, exports);
     storage::Init(env, exports);
     find::Init(env, exports);
     openfile::Init(env, exports);
