@@ -2,25 +2,38 @@ const addon = require('../build/Release/casclib-native')
 
 export const LOCALES = Object.keys(addon.locales)
 
-export type GameName =
-  "Heroes of the Storm" |
-  "World of Warcraft" |
-  "Diablo 3" |
-  "Overwatch" |
-  "Starcraft" |
-  "Starcraft II" |
-  "Unknown"
+type Features = "FILE_NAMES" | 
+  "ROOT_CKEY" | 
+  "TAGS" | 
+  "FNAME_HASHES" | 
+  "FNAME_HASHES_OPTIONAL" | 
+  "FILE_DATA_IDS" | 
+  "LOCALE_FLAGS" | 
+  "CONTENT_FLAGS" | 
+  "ONLINE"
+
+interface Product {
+  codeName: string,
+  buildNumber: number,
+}
 
 export interface AddonStorageInfo {
-  localFileCount: number
-  // gameBuild: number,
-  // installedLocales: number,
+  localFileCount: number,
+  totalFileCount:number,
+  features: Features[],
+  product: Product,
+  gameName: string,
+  pathProduct: string
+
 }
 
 export interface StorageInfo {
-  localFileCount: number
-  // gameBuild: number,
-  // installedLocales: string[],
+  localFileCount: number,
+  totalFileCount:number,
+  features: Features[],
+  product: Product,
+  gameName: string,
+  pathProduct: string
 }
 
 export type OpenStorageCallback = (error: Error, storageHandle: any) => void
@@ -36,6 +49,10 @@ function localesToMask(locales: string[]): number {
   locales.forEach(name => mask |= addon.locales[name])
 
   return mask
+}
+
+export function openOnlineStorageSync(path: string, locales: string[] = [ 'ALL' ]) {
+  return addon.openCascOnlineStorageSync(path, localesToMask(locales))
 }
 
 export function openStorageSync(path: string, locales: string[] = [ 'ALL' ]) {
@@ -63,8 +80,11 @@ export function getStorageInfo(storageHandle: any): StorageInfo {
 
   return {
     localFileCount: info.localFileCount,
-    // gameBuild: info.gameBuild,
-    // installedLocales: localeMaskToList(info.installedLocales),
+    totalFileCount:info.totalFileCount,
+    features: info.features,
+    product: info.product,
+    gameName: info.gameName,
+    pathProduct: info.pathProduct
   }
 }
 
