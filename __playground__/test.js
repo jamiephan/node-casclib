@@ -23,7 +23,7 @@
 
 // addon.closeCascStorage(heroStorageHandle)
 
-import * as casclib from "./binding"
+const casclib = require("..") /* import root, aka the main in package.json to simulate actual node_module */
 
 // Get Name by codeName
 console.log(casclib.getGameNameMapping("hero"))
