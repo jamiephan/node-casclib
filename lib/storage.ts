@@ -12,17 +12,15 @@ export type GameName =
   "Unknown"
 
 export interface AddonStorageInfo {
-  fileCount: number
-  gameName: GameName
-  gameBuild: number,
-  installedLocales: number,
+  localFileCount: number
+  // gameBuild: number,
+  // installedLocales: number,
 }
 
 export interface StorageInfo {
-  fileCount: number
-  gameName: GameName
-  gameBuild: number,
-  installedLocales: string[],
+  localFileCount: number
+  // gameBuild: number,
+  // installedLocales: string[],
 }
 
 export type OpenStorageCallback = (error: Error, storageHandle: any) => void
@@ -64,10 +62,9 @@ export function getStorageInfo(storageHandle: any): StorageInfo {
   const info = addon.getCascStorageInfo(storageHandle) as AddonStorageInfo
 
   return {
-    fileCount: info.fileCount,
-    gameName: info.gameName,
-    gameBuild: info.gameBuild,
-    installedLocales: localeMaskToList(info.installedLocales),
+    localFileCount: info.localFileCount,
+    // gameBuild: info.gameBuild,
+    // installedLocales: localeMaskToList(info.installedLocales),
   }
 }
 

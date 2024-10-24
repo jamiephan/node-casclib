@@ -5,11 +5,12 @@
             'sources': [
                 'src/errors.cc',
                 'src/locales.cc',
-                # 'src/storageinfo.cc',
+                'src/storageinfo.cc',
                 'src/storage.cc',
                 'src/find.cc',
                 'src/openfile.cc',
                 'src/readfile.cc',
+                'src/gamemapping.cc',
                 'src/casclib.cc',
             ],
             'include_dirs': [
