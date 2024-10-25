@@ -1,4 +1,4 @@
-const addon = require('../build/Release/casclib-native')
+const addon = require('node-gyp-build')(__dirname + "/..")
 
 export interface FindResult {
   fullName: string

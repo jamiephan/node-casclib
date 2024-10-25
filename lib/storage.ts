@@ -1,4 +1,4 @@
-const addon = require('../build/Release/casclib-native')
+const addon = require('node-gyp-build')(__dirname + "/..")
 
 export const LOCALES = Object.keys(addon.locales)
 
@@ -24,8 +24,14 @@ export interface AddonStorageInfo {
   product: Product,
   gameName: string,
   pathProduct: string
-
 }
+
+
+
+
+
+
+
 
 export interface StorageInfo {
   localFileCount: number,

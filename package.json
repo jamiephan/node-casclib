@@ -2,11 +2,14 @@
   "main": "./dist/binding.js",
   "types": "./dist/binding.d.ts",
   "dependencies": {
-    "node-addon-api": "^1.1.0"
+    "node-addon-api": "^1.1.0",
+    "node-gyp-build": "^4.8.2"
   },
   "scripts": {
     "prepare": "tsc",
-    "build": "node-gyp build",
+    "build": "prebuildify --napi",
+    "postbuild": "tsc",
+    "install": "node-gyp-build",
     "test": "jest"
   },
   "private": false,
@@ -21,6 +24,7 @@
     "@types/jest": "^22.2.0",
     "@types/node": "^7.0.22",
     "jest": "^22.4.2",
+    "prebuildify": "^6.0.1",
     "ts-jest": "^22.4.1",
     "typescript": "^2.3.3"
   },
