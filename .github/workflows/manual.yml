@@ -41,4 +41,7 @@ jobs:
         find ./prebuilds/ -mindepth 2 -maxdepth 2 -type d -execdir cp -R {} .. \;
         find ./prebuilds/ -mindepth 1 -maxdepth 1 -type d -iname "${{ github.sha }}*" -execdir rm -rf {} \;
         ls -lah -R ./prebuilds/
+    - run: npm publish --access public
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
