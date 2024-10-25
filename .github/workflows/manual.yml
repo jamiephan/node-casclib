@@ -15,7 +15,7 @@ jobs:
     - uses: actions/setup-node@v4
       with:
         node-version: 20.x
-    - name: npm install, build and test
+    - name: yarn
       run: |
         yarn --ignore-scripts
         yarn build
@@ -35,14 +35,17 @@ jobs:
     - uses: actions/download-artifact@v4
       with:
         path: ./prebuilds
-    - name: test
+    - name: Download artifacts from previous matrix builds
       run: |
         ls -lah -R ./prebuilds/
         find ./prebuilds/ -mindepth 2 -maxdepth 2 -type d -execdir cp -R {} .. \;
         find ./prebuilds/ -mindepth 1 -maxdepth 1 -type d -iname "${{ github.sha }}*" -execdir rm -rf {} \;
         ls -lah -R ./prebuilds/
-    - name: Setup tmate session
-      uses: mxschmitt/action-tmate@v3
+    - name: yarn
+      run: |
+        yarn --ignore-scripts
+    # - name: Setup tmate session
+    #   uses: mxschmitt/action-tmate@v3
     - run: npm publish --access public
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
