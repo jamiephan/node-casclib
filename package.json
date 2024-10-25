@@ -9,9 +9,10 @@
     "build": "node-gyp build",
     "test": "jest"
   },
+  "private": false,
   "gypfile": true,
-  "name": "casclib",
-  "version": "1.0.4",
+  "name": "@jamiephan/casclib",
+  "version": "2.0.0-dev.1",
   "description": "CascLib node bindings",
   "author": "Joe Istas <joe.istas@istastech.com>",
   "license": "MIT",
