@@ -147,7 +147,7 @@ unordered_map<string, string> gamemapping::getGameNameMap()
     gameNameMap["provbv"] = "Overwatch 2 Vendor BVID";
     gameNameMap["dst2"] = "Destiny 2";
     gameNameMap["dst2a"] = "Destiny 2 Alpha";
-    gameNameMap["dst2dev"] = 'Destiny 2 "takehome" Dev';
+    gameNameMap["dst2dev"] = "Destiny 2 \"takehome\" Dev";
     gameNameMap["dst2e1"] = "Destiny 2 Event";
     gameNameMap["dst2igr"] = "Destiny 2 Internet Game Room";
     gameNameMap["dst2t"] = "Destiny 2 Public Test";

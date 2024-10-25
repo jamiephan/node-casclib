@@ -2,7 +2,7 @@ const addon = require('../build/Release/casclib-native')
 
 export const LOCALES = Object.keys(addon.locales)
 
-type Features = "FILE_NAMES" | 
+export type Features = "FILE_NAMES" | 
   "ROOT_CKEY" | 
   "TAGS" | 
   "FNAME_HASHES" | 
@@ -12,7 +12,7 @@ type Features = "FILE_NAMES" |
   "CONTENT_FLAGS" | 
   "ONLINE"
 
-interface Product {
+export interface Product {
   codeName: string,
   buildNumber: number,
 }

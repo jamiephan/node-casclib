@@ -12,7 +12,7 @@
   "private": false,
   "gypfile": true,
   "name": "@jamiephan/casclib",
-  "version": "2.0.0-dev.1",
+  "version": "2.0.0-dev.2",
   "description": "CascLib node bindings",
   "author": "Joe Istas <joe.istas@istastech.com>",
   "license": "MIT",
