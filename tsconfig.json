@@ -1,7 +1,9 @@
 {
   "compilerOptions": {
     "declaration": true,
-    "lib": [ "esnext" ],
+    "lib": [
+      "esnext"
+    ],
     "module": "commonjs",
     "outDir": "./dist",
     "rootDir": "./lib",
@@ -11,7 +13,9 @@
       "node"
     ],
     "typeRoots": [
-      "node_modules/@types"
+      "./node_modules/@types",
+      "../node_modules/@types",
+      "../../node_modules/@types"
     ]
   },
   "include": [
