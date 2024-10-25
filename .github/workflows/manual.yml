@@ -7,7 +7,6 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macOS-latest]
-
     steps:
     - uses: actions/checkout@v4
       with:
@@ -24,4 +23,17 @@ jobs:
       with:
         name: ${{ github.sha }}-${{ matrix.os }}-prebuild
         path: ./prebuilds/
-      
+  publish:
+    runs-on: ubuntu-latest
+    if: ${{ always() && contains(join(needs.*.result, ','), 'success') }}
+    needs: [build]
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v4
+      with:
+        path: ./prebuilds
+    - name: test
+      run: |
+        ls ./prebuilds
