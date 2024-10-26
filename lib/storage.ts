@@ -1,28 +1,45 @@
-const addon = require('../build/Release/casclib-native')
+const addon = require('node-gyp-build')(__dirname + "/..")
 
 export const LOCALES = Object.keys(addon.locales)
 
-export type GameName =
-  "Heroes of the Storm" |
-  "World of Warcraft" |
-  "Diablo 3" |
-  "Overwatch" |
-  "Starcraft" |
-  "Starcraft II" |
-  "Unknown"
+export type Features = "FILE_NAMES" | 
+  "ROOT_CKEY" | 
+  "TAGS" | 
+  "FNAME_HASHES" | 
+  "FNAME_HASHES_OPTIONAL" | 
+  "FILE_DATA_IDS" | 
+  "LOCALE_FLAGS" | 
+  "CONTENT_FLAGS" | 
+  "ONLINE"
 
-export interface AddonStorageInfo {
-  fileCount: number
-  gameName: GameName
-  gameBuild: number,
-  installedLocales: number,
+export interface Product {
+  codeName: string,
+  buildNumber: number,
 }
 
+export interface AddonStorageInfo {
+  localFileCount: number,
+  totalFileCount:number,
+  features: Features[],
+  product: Product,
+  gameName: string,
+  pathProduct: string
+}
+
+
+
+
+
+
+
+
 export interface StorageInfo {
-  fileCount: number
-  gameName: GameName
-  gameBuild: number,
-  installedLocales: string[],
+  localFileCount: number,
+  totalFileCount:number,
+  features: Features[],
+  product: Product,
+  gameName: string,
+  pathProduct: string
 }
 
 export type OpenStorageCallback = (error: Error, storageHandle: any) => void
@@ -38,6 +55,10 @@ function localesToMask(locales: string[]): number {
   locales.forEach(name => mask |= addon.locales[name])
 
   return mask
+}
+
+export function openOnlineStorageSync(path: string, locales: string[] = [ 'ALL' ]) {
+  return addon.openCascOnlineStorageSync(path, localesToMask(locales))
 }
 
 export function openStorageSync(path: string, locales: string[] = [ 'ALL' ]) {
@@ -64,10 +85,12 @@ export function getStorageInfo(storageHandle: any): StorageInfo {
   const info = addon.getCascStorageInfo(storageHandle) as AddonStorageInfo
 
   return {
-    fileCount: info.fileCount,
+    localFileCount: info.localFileCount,
+    totalFileCount:info.totalFileCount,
+    features: info.features,
+    product: info.product,
     gameName: info.gameName,
-    gameBuild: info.gameBuild,
-    installedLocales: localeMaskToList(info.installedLocales),
+    pathProduct: info.pathProduct
   }
 }
 

@@ -1,4 +1,4 @@
-node-casclib
+@jamiephan/casclib
 ============
 
 Node bindings for [CascLib](https://github.com/ladislav-zezula/CascLib)
@@ -6,13 +6,13 @@ Node bindings for [CascLib](https://github.com/ladislav-zezula/CascLib)
 Installation
 ------------
 
-node-casclib has been tested on Windows and Linux. To install using npm
+`@jamiephan/casclib` has been tested on Windows and Linux. To install using npm
 
-    npm install casclib
+    npm install @jamiephan/casclib
 
 or with yarn
 
-    yarn add casclib
+    yarn add @jamiephan/casclib
 
 
 Usage
@@ -20,7 +20,7 @@ Usage
 
 Reading a file synchronously.
 
-    import * as casclib from 'casclib'
+    import * as casclib from '@jamiephan/casclib'
 
     const storageHandle = casclib.openStorageSync("path/to/game/directory")
 
@@ -31,7 +31,7 @@ Reading a file synchronously.
 
 Read a file asynchronously with promises.
 
-    import * as casclib from 'casclib'
+    import * as casclib from '@jamiephan/casclib'
 
     casclib.openStorage("path/to/game/directory")
       .then(storageHandle => {
@@ -45,7 +45,7 @@ Read a file asynchronously with promises.
 
 Read a file asynchronously with callbacks.
 
-    import * as casclib from 'casclib'
+    import * as casclib from '@jamiephan/casclib'
 
     casclib.openStorage("path/to/game/directory", (error, storageHandle) => {
       if(error) {

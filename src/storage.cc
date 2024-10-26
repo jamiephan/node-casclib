@@ -55,6 +55,27 @@ Napi::Value OpenCascStorageSync(const Napi::CallbackInfo& info) {
     return Napi::External<void>::New(env, (void*)hStorage);
 }
 
+Napi::Value OpenCascOnlineStorageSync(const Napi::CallbackInfo& info) {
+    Napi::Env env = info.Env();
+
+    // if(!ValidateOpenStorageArguments(info)) {
+    //     return env.Null();
+    // }
+
+    int localeMask = GetLocaleMask(info);
+    Napi::String storagePath = info[0].As<Napi::String>();
+
+    HANDLE hStorage;
+    if(!CascOpenOnlineStorage(storagePath.Utf8Value().c_str(), localeMask, &hStorage)) {
+        errors::ThrowJavascriptErrorWithLastError(env, "Unable to open CASC storage.");
+
+        return env.Null();
+    }
+
+    return Napi::External<void>::New(env, (void*)hStorage);
+}
+
+
 Napi::Value OpenCascStorage(const Napi::CallbackInfo& info) {
     Napi::Env env = info.Env();
 
@@ -112,7 +133,7 @@ storage::OpenAsyncWorker::OpenAsyncWorker(const Napi::Function& callback, const 
 
 void storage::OpenAsyncWorker::Execute() {
     if(!CascOpenStorage(storagePath.c_str(), localeMask, &storageHandle)) {
-        int errorCode = GetLastError();
+        int errorCode = GetCascError();
         string errorMessage = errors::ErrorMessage("Unable to open CASC storage.", errorCode);
         SetError(errorMessage);
     }
@@ -157,6 +178,11 @@ void storage::Init(Napi::Env env, Napi::Object exports) {
     exports.Set(
         Napi::String::New(env, "openCascStorageSync"),
         Napi::Function::New(env, OpenCascStorageSync)
+    );
+
+        exports.Set(
+        Napi::String::New(env, "openCascOnlineStorageSync"),
+        Napi::Function::New(env, OpenCascOnlineStorageSync)
     );
 
     exports.Set(
