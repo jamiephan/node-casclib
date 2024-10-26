@@ -14,6 +14,8 @@ or with yarn
 
     yarn add @jamiephan/casclib
 
+> Note: To reduce package size and without the need of C++ build tools, this fork will now ship with a pre-built [NAPI](https://github.com/nodejs/node-addon-api) binary for Windows/Linux/MacOS (ARM). If you get the error of `No native build was found`, please create an issue with OS platform, arch, runtime, etc. 
+
 
 Usage
 -----------
