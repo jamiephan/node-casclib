@@ -60,3 +60,8 @@ typings/
 .next
 
 test-data.json
+*.example
+__*
+CascLib
+src
+.github
