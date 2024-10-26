@@ -65,3 +65,6 @@ __*
 CascLib
 src
 .github
+build
+.gitmodules
+lib
