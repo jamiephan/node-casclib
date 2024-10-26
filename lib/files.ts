@@ -86,7 +86,7 @@ export class FileReadable extends Readable {
         callback(error)
       }
       catch(e) {
-        callback(e)
+        callback(e as Error)
       }
     }
   }
