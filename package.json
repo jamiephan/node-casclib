@@ -2,26 +2,31 @@
   "main": "./dist/binding.js",
   "types": "./dist/binding.d.ts",
   "dependencies": {
-    "node-addon-api": "^1.1.0"
+    "node-gyp-build": "^4.8.2"
   },
   "scripts": {
     "prepare": "tsc",
-    "build": "node-gyp build",
+    "build": "prebuildify --napi --strip",
+    "postbuild": "tsc",
+    "install": "node-gyp-build",
     "test": "jest"
   },
+  "private": false,
   "gypfile": true,
-  "name": "casclib",
-  "version": "1.0.4",
+  "name": "@jamiephan/casclib",
+  "version": "2.0.0-dev.5",
   "description": "CascLib node bindings",
   "author": "Joe Istas <joe.istas@istastech.com>",
   "license": "MIT",
   "repository": "github:joeistas/node-casclib",
   "devDependencies": {
-    "@types/jest": "^22.2.0",
-    "@types/node": "^7.0.22",
-    "jest": "^22.4.2",
-    "ts-jest": "^22.4.1",
-    "typescript": "^2.3.3"
+    "@types/jest": "^29.5.14",
+    "@types/node": "^22.8.1",
+    "jest": "^29.7.0",
+    "node-addon-api": "^8.2.1",
+    "prebuildify": "^6.0.1",
+    "ts-jest": "^29.2.5",
+    "typescript": "^5.6.3"
   },
   "jest": {
     "transform": {

@@ -1,4 +1,4 @@
-const addon = require('../build/Release/casclib-native')
+const addon = require('node-gyp-build')(__dirname + "/..")
 
 import { Readable, ReadableOptions } from 'stream'
 
@@ -86,7 +86,7 @@ export class FileReadable extends Readable {
         callback(error)
       }
       catch(e) {
-        callback(e)
+        callback(e as Error)
       }
     }
   }

@@ -8,6 +8,7 @@
 #include "find.h"
 #include "openfile.h"
 #include "readfile.h"
+#include "gamemapping.h"
 
 using namespace std;
 
@@ -18,6 +19,7 @@ Napi::Object Init(Napi::Env env, Napi::Object exports) {
     find::Init(env, exports);
     openfile::Init(env, exports);
     readfile::Init(env, exports);
+    gamemapping::Init(env, exports);
 
     return exports;
 }
